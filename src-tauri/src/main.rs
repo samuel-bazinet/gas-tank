@@ -9,12 +9,27 @@ fn greet(name: &str) -> String {
 
 #[tauri::command(rename_all = "snake_case")]
 fn calculate_prices(distance: f64, price: f64, economy: f64, to_fill: f64) -> f64 {
-    ((distance/100f64)*economy+to_fill)*price
+    ((distance / 100f64) * economy + to_fill) * price
+}
+
+#[tauri::command(rename_all = "snake_case")]
+fn calculate_gas_consumption(distance: f64, economy: f64) -> f64 {
+    (distance / 100f64) * economy
+}
+
+#[tauri::command(rename_all = "snake_case")]
+fn calculate_trip_cost(distance: f64, price: f64, economy: f64) -> f64 {
+    ((distance / 100f64) * economy) * price
 }
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, calculate_prices])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            calculate_prices,
+            calculate_gas_consumption,
+            calculate_trip_cost
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

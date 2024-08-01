@@ -1,42 +1,5 @@
 <script lang="ts">
-  import { invoke } from "@tauri-apps/api/tauri";
-
-  let distance: string = "";
-  let economy: string = "";
-  let price: string = "";
-  let to_fill: string = "";
-  let name: string = "";
-  let greetMsg: string = "";
-  let cost = 0;
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-
-    let distance_n = Number(distance);
-    if (Number.isNaN(distance_n)) {
-      alert("Distance isn't a number");
-      return;
-    }
-    let economy_n = Number(economy);
-    if (Number.isNaN(economy_n)) {
-      alert("Economy isn't a number");
-      return;
-    }
-    let price_n = Number(price);
-    if (Number.isNaN(price_n)) {
-      alert("Price isn't a number");
-      return;
-    }
-    let to_fill_n = Number(to_fill);
-    if (Number.isNaN(to_fill_n)) {
-      alert("Amount to fill isn't a number");
-      return;
-    }
-
-    greetMsg = await invoke("greet", { name });
-    cost = await invoke("calculate_prices", { distance: distance_n, price: price_n, economy: economy_n, to_fill: to_fill_n});
-    cost = Math.round((cost + Number.EPSILON)*100)/100
-  }
+  import GasStation from "../lib/GasStation.svelte";
 </script>
 
 <div class="container">
@@ -56,17 +19,7 @@
 
   <p>Click on the Tauri, Vite, and logos to learn more.</p>
 
-  <form class="row" on:submit|preventDefault={greet}>
-    <input id="greet-input" placeholder="Enter a name..." bind:value={name} />
-    <input id="greet-input" placeholder="Enter distance..." bind:value={distance} />
-    <input id="greet-input" placeholder="Enter price..." bind:value={price} />
-    <input id="greet-input" placeholder="Enter economy..." bind:value={economy} />
-    <input id="greet-input" placeholder="Enter amount to fill..." bind:value={to_fill} />
-    <button type="submit">Calculate</button>
-  </form>
-
-  <p>{greetMsg}</p>
-  <p>Your tank will cost ${cost}</p>
+  <GasStation />
 </div>
 
 <style>
@@ -133,41 +86,6 @@
     text-align: center;
   }
 
-  input,
-  button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    color: #0f0f0f;
-    background-color: #ffffff;
-    transition: border-color 0.25s;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-  button:hover {
-    border-color: #396cd8;
-  }
-  button:active {
-    border-color: #396cd8;
-    background-color: #e8e8e8;
-  }
-
-  input,
-  button {
-    outline: none;
-  }
-
-  #greet-input {
-    margin-right: 5px;
-  }
-
   @media (prefers-color-scheme: dark) {
     :root {
       color: #f6f6f6;
@@ -176,15 +94,6 @@
 
     a:hover {
       color: #24c8db;
-    }
-
-    input,
-    button {
-      color: #ffffff;
-      background-color: #0f0f0f98;
-    }
-    button:active {
-      background-color: #0f0f0f69;
     }
   }
 </style>
