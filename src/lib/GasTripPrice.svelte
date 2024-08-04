@@ -4,7 +4,6 @@
     let distance: string = "";
     let economy: string = "";
     let price: string = "";
-    let to_fill: string = "";
     let cost_str: string = "";
 
     async function calculate() {
@@ -28,36 +27,24 @@
             return;
         }
 
-        let to_fill_n = Number(to_fill);
-        if (Number.isNaN(to_fill_n)) {
-            alert("Amount to fill isn't a number");
-            return;
-        }
-
-        let cost: number = await invoke("calculate_prices", {
+        let cost: number = await invoke("calculate_trip_cost", {
             distance: distance_n,
             price: price_n,
             economy: economy_n,
-            to_fill: to_fill_n,
         });
 
         cost = Math.round((cost + Number.EPSILON) * 100) / 100;
 
-        cost_str = `Your tank will cost $${cost}.`;
+        cost_str = `Your trip will cost $${cost}.`;
     }
 </script>
 
 <div>
 
-    <h3>Cost to fill at gas station</h3>
+    <h3>Gas cost for a trip</h3>
 
     <form class="row" on:submit|preventDefault={calculate}>
         
-        <input
-            id="calculate-fill"
-            placeholder="Enter amount to fill..."
-            bind:value={to_fill}
-        />
         <input
             id="calculate-distance"
             placeholder="Enter distance..."

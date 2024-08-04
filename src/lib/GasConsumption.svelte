@@ -3,9 +3,7 @@
 
     let distance: string = "";
     let economy: string = "";
-    let price: string = "";
-    let to_fill: string = "";
-    let cost_str: string = "";
+    let consumption_str: string = "";
 
     async function calculate() {
         // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -22,51 +20,26 @@
             return;
         }
 
-        let price_n = Number(price);
-        if (Number.isNaN(price_n)) {
-            alert("Price isn't a number");
-            return;
-        }
-
-        let to_fill_n = Number(to_fill);
-        if (Number.isNaN(to_fill_n)) {
-            alert("Amount to fill isn't a number");
-            return;
-        }
-
-        let cost: number = await invoke("calculate_prices", {
+        let consumption: number = await invoke("calculate_gas_consumption", {
             distance: distance_n,
-            price: price_n,
             economy: economy_n,
-            to_fill: to_fill_n,
         });
 
-        cost = Math.round((cost + Number.EPSILON) * 100) / 100;
+        consumption = Math.round((consumption + Number.EPSILON) * 100) / 100;
 
-        cost_str = `Your tank will cost $${cost}.`;
+        consumption_str = `You will need ${consumption}L of gas to complete this trip.`;
     }
 </script>
 
 <div>
 
-    <h3>Cost to fill at gas station</h3>
+    <h3>Gas usage for a trip</h3>
 
     <form class="row" on:submit|preventDefault={calculate}>
-        
-        <input
-            id="calculate-fill"
-            placeholder="Enter amount to fill..."
-            bind:value={to_fill}
-        />
         <input
             id="calculate-distance"
             placeholder="Enter distance..."
             bind:value={distance}
-        />
-        <input
-            id="calculate-price"
-            placeholder="Enter price..."
-            bind:value={price}
         />
         <input
             id="calculate-economy"
@@ -76,5 +49,5 @@
         <button type="submit">Calculate</button>
     </form>
 
-    <p>{cost_str}</p>
+    <p>{consumption_str}</p>
 </div>

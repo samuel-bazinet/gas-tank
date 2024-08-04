@@ -1,5 +1,7 @@
 <script lang="ts">
-  import GasStation from "../lib/GasStation.svelte";
+  import GasStation from "$lib/GasStation.svelte";
+  import GasConsumption from "$lib/GasConsumption.svelte";
+  import GasTripPrice from "$lib/GasTripPrice.svelte";
 </script>
 
 <div class="container">
@@ -12,6 +14,11 @@
   <p>Fill out the text fields to calculate the price of your next gas tank.</p>
 
   <GasStation />
+
+  <GasConsumption />
+
+  <GasTripPrice />
+
 </div>
 
 <style>
