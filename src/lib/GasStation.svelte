@@ -48,32 +48,53 @@
 </script>
 
 <div>
-
     <h3>Cost to fill at gas station</h3>
 
     <form class="row" on:submit|preventDefault={calculate}>
-        
-        <input
-            id="calculate-fill"
-            placeholder="Enter amount to fill..."
-            bind:value={to_fill}
-        />
-        <input
-            id="calculate-distance"
-            placeholder="Enter distance..."
-            bind:value={distance}
-        />
-        <input
-            id="calculate-price"
-            placeholder="Enter price..."
-            bind:value={price}
-        />
-        <input
-            id="calculate-economy"
-            placeholder="Enter economy..."
-            bind:value={economy}
-        />
-        <button type="submit">Calculate</button>
+        <table>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-fill"
+                        placeholder="Enter amount to fill..."
+                        bind:value={to_fill}
+                    />
+                </td>
+                <td> L </td>
+            </tr>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-distance"
+                        placeholder="Enter distance..."
+                        bind:value={distance}
+                    />
+                </td>
+                <td> KM </td>
+            </tr>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-price"
+                        placeholder="Enter price..."
+                        bind:value={price}
+                    />
+                </td>
+                <td> $ </td>
+            </tr>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-economy"
+                        placeholder="Enter economy..."
+                        bind:value={economy}
+                    />
+                </td>
+                <td> L/100KM </td>
+            </tr>
+
+            <button type="submit">Calculate</button>
+        </table>
     </form>
 
     <p>{cost_str}</p>

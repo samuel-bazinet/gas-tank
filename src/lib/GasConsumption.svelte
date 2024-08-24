@@ -32,21 +32,32 @@
 </script>
 
 <div>
-
     <h3>Gas usage for a trip</h3>
 
     <form class="row" on:submit|preventDefault={calculate}>
-        <input
-            id="calculate-distance"
-            placeholder="Enter distance..."
-            bind:value={distance}
-        />
-        <input
-            id="calculate-economy"
-            placeholder="Enter economy..."
-            bind:value={economy}
-        />
-        <button type="submit">Calculate</button>
+        <table>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-distance"
+                        placeholder="Enter distance..."
+                        bind:value={distance}
+                    />
+                </td>
+                <td> KM </td>
+            </tr>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-economy"
+                        placeholder="Enter economy..."
+                        bind:value={economy}
+                    />
+                </td>
+                <td> L/100KM </td>
+            </tr>
+            <button type="submit">Calculate</button>
+        </table>
     </form>
 
     <p>{consumption_str}</p>
