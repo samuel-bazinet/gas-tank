@@ -40,7 +40,6 @@
 </script>
 
 <div>
-    <h3>Gas cost for a trip</h3>
 
     <form class="row" on:submit|preventDefault={calculate}>
         <table>
@@ -80,3 +79,7 @@
 
     <p>{cost_str}</p>
 </div>
+
+<style>
+    
+</style>

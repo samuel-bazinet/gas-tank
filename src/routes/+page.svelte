@@ -5,14 +5,11 @@
 </script>
 
 <div class="container">
-  <h1>Welcome to Gas Tank!</h1>
 
   <div class="row">
       <img src="/gas-tank_256.png" class="logo" alt="Logo" />
   </div>
-
-  <p>Fill out the text fields to calculate the price of your next gas tank.</p>
-
+  
   <GasStation />
 
   <GasConsumption />

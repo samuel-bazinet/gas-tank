@@ -32,7 +32,6 @@
 </script>
 
 <div>
-    <h3>Gas usage for a trip</h3>
 
     <form class="row" on:submit|preventDefault={calculate}>
         <table>

@@ -8,7 +8,7 @@
     let cost_str: string = "";
 
     let headers: string[] = ["", "", ""];
-    let stations: string[][] = [headers];
+    let stations: string[][] = [[...headers]];
 
     function addStation() {
         stations = [...stations, [...headers]];
@@ -29,15 +29,15 @@
             return;
         }
 
-        let distance_n = Number(distance);
-        if (Number.isNaN(distance_n)) {
+        let to_fill_n = Number(to_fill);
+        if (Number.isNaN(to_fill_n)) {
             alert("Distance isn't a number");
             return;
         }
 
         stations.forEach(async (station) => {
-            let to_fill_n = Number(station[1]);
-            if (Number.isNaN(to_fill_n)) {
+            let distance_n = Number(station[1]);
+            if (Number.isNaN(distance_n)) {
                 alert("Amount to fill isn't a number");
                 return;
             }
@@ -64,7 +64,6 @@
 </script>
 
 <div>
-    <h3>Cost to fill at gas station</h3>
 
     <table>
         <tr>
@@ -130,3 +129,7 @@
 
     <p>{cost_str}</p>
 </div>
+
+<style>
+    
+</style>
