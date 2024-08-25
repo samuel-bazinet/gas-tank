@@ -7,14 +7,21 @@
     let to_fill: string = "";
     let cost_str: string = "";
 
+    let headers: string[] = ["", "", ""];
+    let stations: string[][] = [headers];
+
+    function addStation() {
+        stations = [...stations, [...headers]];
+    }
+
+    function deleteStation(toBeDeleted: string[]) {
+        stations = stations.filter((row) => row != toBeDeleted);
+    }
+
     async function calculate() {
         // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
-        let distance_n = Number(distance);
-        if (Number.isNaN(distance_n)) {
-            alert("Distance isn't a number");
-            return;
-        }
+        cost_str = "";
 
         let economy_n = Number(economy);
         if (Number.isNaN(economy_n)) {
@@ -22,52 +29,80 @@
             return;
         }
 
-        let price_n = Number(price);
-        if (Number.isNaN(price_n)) {
-            alert("Price isn't a number");
+        let distance_n = Number(distance);
+        if (Number.isNaN(distance_n)) {
+            alert("Distance isn't a number");
             return;
         }
 
-        let to_fill_n = Number(to_fill);
-        if (Number.isNaN(to_fill_n)) {
-            alert("Amount to fill isn't a number");
-            return;
-        }
+        stations.forEach(async (station) => {
+            let to_fill_n = Number(station[1]);
+            if (Number.isNaN(to_fill_n)) {
+                alert("Amount to fill isn't a number");
+                return;
+            }
 
-        let cost: number = await invoke("calculate_prices", {
-            distance: distance_n,
-            price: price_n,
-            economy: economy_n,
-            to_fill: to_fill_n,
+            let price_n = Number(station[2]);
+            if (Number.isNaN(price_n)) {
+                alert("Price isn't a number");
+                return;
+            }
+
+            let cost: number = await invoke("calculate_prices", {
+                distance: distance_n,
+                price: price_n,
+                economy: economy_n,
+                to_fill: to_fill_n,
+            });
+
+            cost = Math.round((cost + Number.EPSILON) * 100) / 100;
+
+            // loop through all the gas stations and append this string with all the costs
+            cost_str += `${station[0]} will cost $${cost}.\n`;
         });
-
-        cost = Math.round((cost + Number.EPSILON) * 100) / 100;
-
-        cost_str = `Your tank will cost $${cost}.`;
     }
 </script>
 
 <div>
     <h3>Cost to fill at gas station</h3>
 
-    <form class="row" on:submit|preventDefault={calculate}>
-        <table>
+    <table>
+        <tr>
+            <td>
+                <input
+                    id="calculate-fill"
+                    placeholder="Amount to fill"
+                    bind:value={to_fill}
+                />
+            </td>
+            <td> L </td>
+        </tr>
+        <tr>
+            <td>
+                <input
+                    id="calculate-economy"
+                    placeholder="Fuel Economy"
+                    bind:value={economy}
+                />
+            </td>
+            <td> L/100KM </td>
+        </tr>
+        {#each stations as station}
             <tr>
                 <td>
                     <input
-                        id="calculate-fill"
-                        placeholder="Enter amount to fill..."
-                        bind:value={to_fill}
+                        id="station-name"
+                        placeholder="Station Name"
+                        bind:value={station[0]}
                     />
                 </td>
-                <td> L </td>
             </tr>
             <tr>
                 <td>
                     <input
                         id="calculate-distance"
-                        placeholder="Enter distance..."
-                        bind:value={distance}
+                        placeholder="Distance"
+                        bind:value={station[1]}
                     />
                 </td>
                 <td> KM </td>
@@ -76,26 +111,22 @@
                 <td>
                     <input
                         id="calculate-price"
-                        placeholder="Enter price..."
-                        bind:value={price}
+                        placeholder="Price"
+                        bind:value={station[2]}
                     />
                 </td>
                 <td> $ </td>
             </tr>
             <tr>
-                <td>
-                    <input
-                        id="calculate-economy"
-                        placeholder="Enter economy..."
-                        bind:value={economy}
-                    />
-                </td>
-                <td> L/100KM </td>
+                <button on:click={() => deleteStation(station)}
+                    >Remove Station</button
+                >
             </tr>
+        {/each}
+        <button on:click={addStation}>Add Station</button>
 
-            <button type="submit">Calculate</button>
-        </table>
-    </form>
+        <button on:click={calculate}>Calculate</button>
+    </table>
 
     <p>{cost_str}</p>
 </div>
