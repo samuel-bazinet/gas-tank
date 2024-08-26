@@ -10,11 +10,27 @@
       <img src="/gas-tank_256.png" class="logo" alt="Logo" />
   </div>
   
-  <GasStation />
+  <fieldset class="feature">
+    <legend>
+      <img src="/gas-tank_128.png" class="b-head" alt="Gas Station"/>
+    </legend>
+    <GasStation />
+  </fieldset>
 
-  <GasConsumption />
+  <fieldset class="feature">
+    <legend>
+      <img src="/car.png" class="b-head" alt="Car"/>
+    </legend>
+    <GasConsumption />
+  </fieldset>
 
-  <GasTripPrice />
+  
+  <fieldset class="feature">
+    <legend>
+      <img src="/jerry.png" class="b-head" alt="Jerry Can"/>
+    </legend>
+    <GasTripPrice />
+  </fieldset>
 
 </div>
 
@@ -42,7 +58,6 @@
   .container {
     margin: 0;
     padding-top: 10vh;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
@@ -56,13 +71,21 @@
   }
 
   .row {
-    display: flex;
     justify-content: center;
   }
 
-  h1 {
-    text-align: center;
+  .feature {
+    float: left;
+    border-radius: 1rem;
+    border: 2px solid #a3a3a3;
+    padding: 1rem;
+    margin: .2rem;
   }
+
+  .b-head {
+    height: 4.5rem;
+  }
+
 
   @media (prefers-color-scheme: dark) {
     :root {

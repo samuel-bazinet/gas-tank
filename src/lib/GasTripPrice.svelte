@@ -11,19 +11,16 @@
 
         let distance_n = Number(distance);
         if (Number.isNaN(distance_n)) {
-            alert("Distance isn't a number");
             return;
         }
 
         let economy_n = Number(economy);
         if (Number.isNaN(economy_n)) {
-            alert("Economy isn't a number");
             return;
         }
 
         let price_n = Number(price);
         if (Number.isNaN(price_n)) {
-            alert("Price isn't a number");
             return;
         }
 
@@ -47,7 +44,7 @@
                 <td>
                     <input
                         id="calculate-distance"
-                        placeholder="Enter distance..."
+                        placeholder="Distance"
                         bind:value={distance}
                     />
                 </td>
@@ -57,7 +54,7 @@
                 <td>
                     <input
                         id="calculate-price"
-                        placeholder="Enter price..."
+                        placeholder="Price"
                         bind:value={price}
                     />
                 </td>
@@ -67,7 +64,7 @@
                 <td>
                     <input
                         id="calculate-economy"
-                        placeholder="Enter economy..."
+                        placeholder="Economy"
                         bind:value={economy}
                     />
                 </td>

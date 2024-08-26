@@ -5,7 +5,7 @@
     let economy: string = "";
     let price: string = "";
     let to_fill: string = "";
-    let cost_str: string = "";
+    let cost_str: string[] = [];
 
     let headers: string[] = ["", "", ""];
     let stations: string[][] = [[...headers]];
@@ -21,30 +21,26 @@
     async function calculate() {
         // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
-        cost_str = "";
+        cost_str = [];
 
         let economy_n = Number(economy);
         if (Number.isNaN(economy_n)) {
-            alert("Economy isn't a number");
             return;
         }
 
         let to_fill_n = Number(to_fill);
         if (Number.isNaN(to_fill_n)) {
-            alert("Distance isn't a number");
             return;
         }
 
         stations.forEach(async (station) => {
             let distance_n = Number(station[1]);
             if (Number.isNaN(distance_n)) {
-                alert("Amount to fill isn't a number");
                 return;
             }
 
             let price_n = Number(station[2]);
             if (Number.isNaN(price_n)) {
-                alert("Price isn't a number");
                 return;
             }
 
@@ -58,13 +54,12 @@
             cost = Math.round((cost + Number.EPSILON) * 100) / 100;
 
             // loop through all the gas stations and append this string with all the costs
-            cost_str += `${station[0]} will cost $${cost}.\n`;
+            cost_str = [...cost_str, `${station[0]} will cost $${cost}.\n`];
         });
     }
 </script>
 
 <div>
-
     <table>
         <tr>
             <td>
@@ -127,9 +122,13 @@
         <button on:click={calculate}>Calculate</button>
     </table>
 
-    <p>{cost_str}</p>
-</div>
+    {#each cost_str as str}
+        <p>{str}</p>
+    {/each}
+</div>  
 
 <style>
-    
+    p {
+        margin: .3rem;
+    }
 </style>
