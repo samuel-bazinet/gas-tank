@@ -10,13 +10,11 @@
 
         let distance_n = Number(distance);
         if (Number.isNaN(distance_n)) {
-            alert("Distance isn't a number");
             return;
         }
 
         let economy_n = Number(economy);
         if (Number.isNaN(economy_n)) {
-            alert("Economy isn't a number");
             return;
         }
 
@@ -33,20 +31,30 @@
 
 <div>
 
-    <h3>Gas usage for a trip</h3>
-
     <form class="row" on:submit|preventDefault={calculate}>
-        <input
-            id="calculate-distance"
-            placeholder="Enter distance..."
-            bind:value={distance}
-        />
-        <input
-            id="calculate-economy"
-            placeholder="Enter economy..."
-            bind:value={economy}
-        />
-        <button type="submit">Calculate</button>
+        <table>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-distance"
+                        placeholder="Distance"
+                        bind:value={distance}
+                    />
+                </td>
+                <td> KM </td>
+            </tr>
+            <tr>
+                <td>
+                    <input
+                        id="calculate-economy"
+                        placeholder="Economy"
+                        bind:value={economy}
+                    />
+                </td>
+                <td> L/100KM </td>
+            </tr>
+            <button type="submit">Calculate</button>
+        </table>
     </form>
 
     <p>{consumption_str}</p>
