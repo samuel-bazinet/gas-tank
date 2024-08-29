@@ -19,7 +19,7 @@
 
   <fieldset class="feature">
     <legend>
-      <img src="/car.png" class="b-head" alt="Car"/>
+      <img src="/fuel-coms_256.png" class="b-head" alt="Car"/>
     </legend>
     <GasConsumption />
   </fieldset>
@@ -27,7 +27,7 @@
   
   <fieldset class="feature">
     <legend>
-      <img src="/jerry.png" class="b-head" alt="Jerry Can"/>
+      <img src="/fuel-cost_256.png" class="b-head" alt="Jerry Can"/>
     </legend>
     <GasTripPrice />
   </fieldset>
@@ -75,7 +75,7 @@
   }
 
   .feature {
-    float: left;
+    display: inline-block;
     border-radius: 1rem;
     border: 2px solid #a3a3a3;
     padding: 1rem;
