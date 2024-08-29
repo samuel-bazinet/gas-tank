@@ -2,36 +2,41 @@
   import GasStation from "$lib/GasStation.svelte";
   import GasConsumption from "$lib/GasConsumption.svelte";
   import GasTripPrice from "$lib/GasTripPrice.svelte";
+  import Range from "$lib/Range.svelte";
 </script>
 
 <div class="container">
-
   <div class="row">
-      <img src="/gas-tank_256.png" class="logo" alt="Logo" />
+    <img src="/gas-tank_256.png" class="logo" alt="Logo" />
   </div>
-  
+
   <fieldset class="feature">
     <legend>
-      <img src="/gas-tank_128.png" class="b-head" alt="Gas Station"/>
+      <img src="/gas-tank_128.png" class="b-head" alt="Gas Station" />
     </legend>
     <GasStation />
   </fieldset>
 
   <fieldset class="feature">
     <legend>
-      <img src="/fuel-coms_256.png" class="b-head" alt="Car"/>
+      <img src="/fuel-coms_256.png" class="b-head" alt="Fuel Consumption" />
     </legend>
     <GasConsumption />
   </fieldset>
 
-  
   <fieldset class="feature">
     <legend>
-      <img src="/fuel-cost_256.png" class="b-head" alt="Jerry Can"/>
+      <img src="/fuel-cost_256.png" class="b-head" alt="Fuel Cost" />
     </legend>
     <GasTripPrice />
   </fieldset>
 
+  <fieldset class="feature">
+    <legend>
+      <img src="/gas-range_256.png" class="b-head" alt="Range" />
+    </legend>
+    <Range />
+  </fieldset>
 </div>
 
 <style>
@@ -75,17 +80,16 @@
   }
 
   .feature {
-    display: inline-block;
+    display: inline-flex;
     border-radius: 1rem;
     border: 2px solid #a3a3a3;
     padding: 1rem;
-    margin: .2rem;
+    margin: 0.2rem;
   }
 
   .b-head {
     height: 4.5rem;
   }
-
 
   @media (prefers-color-scheme: dark) {
     :root {

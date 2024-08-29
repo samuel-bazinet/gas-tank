@@ -22,13 +22,19 @@ fn calculate_trip_cost(distance: f64, price: f64, economy: f64) -> f64 {
     ((distance / 100f64) * economy) * price
 }
 
+#[tauri::command(rename_all = "snake_case")]
+fn calculate_range(fuel_capacity: f64, economy: f64) -> f64 {
+    (1f64 / (economy / 100f64)) * fuel_capacity
+}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             greet,
             calculate_prices,
             calculate_gas_consumption,
-            calculate_trip_cost
+            calculate_trip_cost,
+            calculate_range
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
