@@ -82,11 +82,16 @@
             <td> L/100KM </td>
         </tr>
         {#each stations as station}
+            <tr class="line">
+                <div></div>
+            </tr>
             <tr>
                 <td>
                     <input
+                        type="text"
                         id="station-name"
                         placeholder="Station Name"
+                        style="background-color:lightgrey"
                         bind:value={station[0]}
                     />
                 </td>
@@ -125,10 +130,20 @@
     {#each cost_str as str}
         <p>{str}</p>
     {/each}
-</div>  
+</div>
 
 <style>
     p {
-        margin: .3rem;
+        margin: 0.3rem;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    tr.line {
+        border: solid;
+        border-bottom: 1px;
+        border-color: #FFC90E;
     }
 </style>
